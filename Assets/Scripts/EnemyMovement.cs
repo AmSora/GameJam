@@ -6,13 +6,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     private Transform target;
     private int pathIndex = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         target = LevelManager.main.path[pathIndex];
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Vector2.Distance(target.position, transform.position) <= 0.1f)
@@ -20,6 +19,8 @@ public class EnemyMovement : MonoBehaviour
             pathIndex++;
             if (pathIndex == LevelManager.main.path.Length)
             {
+                // Hacer daño al jugador
+                GameManager.main.RecibirDaño(1);
                 Destroy(gameObject);
                 return;
             }
@@ -29,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
+
     private void FixedUpdate()
     {
         Vector2 direction = (target.position - transform.position).normalized;

@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int daño = 3;
-    public Faccion faccionOrigen;
-
+    void Start()
+    {
+        Destroy(gameObject, 2f); // Se autodestruye después de 2 segundos
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        TakeDamage objetivo = other.GetComponent<TakeDamage>();
-        if (objetivo != null && objetivo.faccion != faccionOrigen)
+        if (other.CompareTag("Enemigo"))
         {
-            objetivo.RecibirDaño(daño);
-            Destroy(gameObject);
+            Destroy(other.gameObject); // Elimina al enemigo
+            Destroy(gameObject);       // Destruye la bala
         }
     }
 }
