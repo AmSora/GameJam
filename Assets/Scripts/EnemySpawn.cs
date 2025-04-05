@@ -1,34 +1,33 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [System.Serializable]
-    public class SpawnZone
-    {
-        public Transform spawnPoint;
-        public List<GameObject> enemigos = new List<GameObject>();
-    }
-
+    public Transform spawnPoint;
     public GameObject enemigoPrefab;
-    public float tiempoEntreSpawns = 5f;
-    public float radioSpawn = 2f; // Radio dentro del cual spawnea el enemigo
+    public float tiempoEntreSpawns = 1.5f;
+    public float tiempoEntreOleadas = 25f;
 
-    private List<SpawnZone> zonasDeSpawn = new List<SpawnZone>();
+    private List<GameObject> enemigosVivos = new List<GameObject>();
+    private int oleadaActual = 1;
+    private int enemigosSpawneados = 0;
+    private int enemigosMaximos = 0;
+    private bool esperandoSiguienteOleada = false;
 
     void Start()
     {
-        // Obtener automáticamente todos los hijos como zonas de spawn
-        foreach (Transform hijo in transform)
-        {
-            SpawnZone nuevaZona = new SpawnZone();
-            nuevaZona.spawnPoint = hijo;
-            zonasDeSpawn.Add(nuevaZona);
-        }
-
+        IniciarNuevaOleada();
         StartCoroutine(SpawnEnemigosRutina());
+    }
+
+    void IniciarNuevaOleada()
+    {
+        Debug.Log($"Iniciando Oleada {oleadaActual}");
+        enemigosMaximos = 20 + (oleadaActual * 3);
+        enemigosSpawneados = 0;
+        enemigosVivos.Clear();
+        esperandoSiguienteOleada = false;
     }
 
     IEnumerator SpawnEnemigosRutina()
@@ -37,30 +36,29 @@ public class EnemySpawn : MonoBehaviour
         {
             yield return new WaitForSeconds(tiempoEntreSpawns);
 
-            // Elegir la zona con menos enemigos
-            SpawnZone mejorZona = null;
-            int menorCantidad = int.MaxValue;
+            if (esperandoSiguienteOleada) continue;
 
-            foreach (var zona in zonasDeSpawn)
+            enemigosVivos.RemoveAll(e => e == null);
+
+            if (enemigosSpawneados < enemigosMaximos)
             {
-                zona.enemigos.RemoveAll(e => e == null);
-
-                if (zona.enemigos.Count < menorCantidad)
-                {
-                    menorCantidad = zona.enemigos.Count;
-                    mejorZona = zona;
-                }
+                GameObject nuevoEnemigo = Instantiate(enemigoPrefab, spawnPoint.position, Quaternion.identity);
+                enemigosVivos.Add(nuevoEnemigo);
+                enemigosSpawneados++;
             }
-
-            if (mejorZona != null)
+            else if (enemigosVivos.Count == 0)
             {
-                // Calcular posición aleatoria dentro de un círculo
-                Vector2 offset = UnityEngine.Random.insideUnitCircle * radioSpawn;
-                Vector3 spawnPos = mejorZona.spawnPoint.position + (Vector3)offset;
-
-                GameObject nuevoEnemigo = Instantiate(enemigoPrefab, spawnPos, Quaternion.identity);
-                mejorZona.enemigos.Add(nuevoEnemigo);
+                esperandoSiguienteOleada = true;
+                StartCoroutine(EsperarYSiguienteOleada());
             }
         }
+    }
+
+    IEnumerator EsperarYSiguienteOleada()
+    {
+        Debug.Log("Todos los enemigos eliminados. Próxima oleada en " + tiempoEntreOleadas + " segundos...");
+        yield return new WaitForSeconds(tiempoEntreOleadas);
+        oleadaActual++;
+        IniciarNuevaOleada();
     }
 }
