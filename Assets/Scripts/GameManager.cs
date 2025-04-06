@@ -4,8 +4,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager main;
 
-    public int vidaMaxima = 3;
-    private int vidaActual;
+    public int maxHealth = 3;
+    private int currentHealth;
+
+    public int currentCoffee = 500;
 
     private void Awake()
     {
@@ -17,24 +19,47 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        vidaActual = vidaMaxima;
+        currentHealth = maxHealth;
+        UIManager.instance.UpdateCoffeeUI(currentCoffee);
     }
 
-    public void RecibirDaño(int cantidad)
+    public void TakeDamage(int amount)
     {
-        vidaActual -= cantidad;
-        Debug.Log($"¡Has recibido {cantidad} de daño! Vida restante: {vidaActual}");
+        currentHealth -= amount;
+        Debug.Log($"Received {amount} damage! Remaining health: {currentHealth}");
 
-        if (vidaActual <= 0)
+        if (currentHealth <= 0)
         {
             GameOver();
         }
     }
 
+    public bool SpendCoffee(int amount)
+    {
+        if (currentCoffee >= amount)
+        {
+            currentCoffee -= amount;
+            Debug.Log("Spent " + amount + " coffee. Remaining: " + currentCoffee);
+            UIManager.instance.UpdateCoffeeUI(currentCoffee);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not enough coffee.");
+            return false;
+        }
+    }
+
+    public void AddCoffee(int amount)
+    {
+        currentCoffee += amount;
+        Debug.Log("Added " + amount + " coffee. Total: " + currentCoffee);
+        UIManager.instance.UpdateCoffeeUI(currentCoffee);
+    }
+
     private void GameOver()
     {
-        Debug.Log("¡GAME OVER!");
-        // Aquí puedes pausar el juego, mostrar una UI, etc.
+        Debug.Log("GAME OVER!");
         Time.timeScale = 0;
     }
 }

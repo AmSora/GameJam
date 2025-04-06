@@ -2,80 +2,57 @@ using UnityEngine;
 
 public class TowerShot : MonoBehaviour
 {
-    public float rango = 5f;
-    public Transform parteRotatoria;
-    public GameObject proyectilPrefab;
-    public float velocidadProyectil = 10f;
-    public float tiempoDisparo = 1f;
+    [Header("Shooting")]
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float fireRate = 1f;
 
-    private float temporizador;
-    private Transform objetivo;
+    private float fireCooldown = 0f;
 
-    void Update()
+    private void Update()
     {
-        temporizador -= Time.deltaTime;
+        fireCooldown -= Time.deltaTime;
 
-        if (objetivo == null || Vector2.Distance(transform.position, objetivo.position) > rango)
+        if (CanShootTarget(out Transform target))
         {
-            BuscarNuevoObjetivo();
+            if (fireCooldown <= 0f)
+            {
+                Shoot(target);
+                fireCooldown = 1f / fireRate;
+            }
         }
 
-        if (objetivo != null)
+    }
+
+    private bool CanShootTarget(out Transform target)
+    {
+        target = null;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 5f);
+
+        foreach (var hit in hits)
         {
-            Apuntar();
-            if (temporizador <= 0f)
+            if (hit.CompareTag("Enemy"))
             {
-                Disparar();
-                temporizador = tiempoDisparo;
+                target = hit.transform;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void Shoot(Transform target)
+    {
+        if (bulletPrefab != null && firePoint != null && target != null)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            Bullet bulletComp = bullet.GetComponent<Bullet>();
+
+            if (bulletComp != null)
+            {
+                bulletComp.colorID = GetComponent<TowerData>().towerTypeID;
+                bulletComp.SetTarget(target); // Aquí usamos el seguimiento
             }
         }
     }
 
-    void BuscarNuevoObjetivo()
-    {
-        GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemigo");
-        float distanciaMin = Mathf.Infinity;
-        Transform mejorObjetivo = null;
-
-        foreach (GameObject enemigo in enemigos)
-        {
-            float distancia = Vector2.Distance(transform.position, enemigo.transform.position);
-            if (distancia < rango && distancia < distanciaMin)
-            {
-                distanciaMin = distancia;
-                mejorObjetivo = enemigo.transform;
-            }
-        }
-
-        objetivo = mejorObjetivo;
-    }
-
-    void Apuntar()
-    {
-        Vector2 direccion = objetivo.position - parteRotatoria.position;
-        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
-        parteRotatoria.rotation = Quaternion.Euler(0, 0, angulo);
-    }
-
-    void Disparar()
-    {
-        Vector2 direccion = (objetivo.position - transform.position).normalized;
-        GameObject bala = Instantiate(proyectilPrefab, transform.position, Quaternion.identity);
-
-        Rigidbody2D rb = bala.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = direccion * velocidadProyectil;
-        }
-        else
-        {
-            bala.transform.position += (Vector3)(direccion * velocidadProyectil * Time.deltaTime);
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rango);
-    }
 }

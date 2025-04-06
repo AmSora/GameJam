@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 234685088498443276}
   - component: {fileID: 5290796248024911061}
   - component: {fileID: 5986678939584187692}
+  - component: {fileID: -1857880134284451102}
+  - component: {fileID: -4661958809063341055}
   m_Layer: 0
   m_Name: Hexagon_Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,12 +103,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d05057a3014cb945a330caf25c2f507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rango: 5
-  parteRotatoria: {fileID: 2915970181034205281}
-  proyectilPrefab: {fileID: 1838153586707041151, guid: aeefbc4a803741c4d9982c4928a34899, type: 3}
-  velocidadProyectil: 10
-  tiempoDisparo: 1
-  "da\xF1o": 3
+  bulletPrefab: {fileID: 1838153586707041151, guid: 7b3fbf86bd4729345b93b86bfea602df, type: 3}
+  firePoint: {fileID: 1084277414351398648}
+  fireRate: 1
+--- !u!114 &-1857880134284451102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575495927085023200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411f6ac9a5f40564c8848afcb591cf5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coffeeCost: 300
+  baseDamage: 1
+  baseFireRate: 1
+  upgradeDamageCost: 200
+  upgradeFireRateCost: 150
+  towerTypeID: 1
+  musicID: Drums
+--- !u!61 &-4661958809063341055
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575495927085023200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8828125, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8828125, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &5215676014758491251
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +197,8 @@ Transform:
   m_GameObject: {fileID: 5215676014758491251}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.24623993, y: -0.0027280152, z: 0}
-  m_LocalScale: {x: 0.17775765, y: 0.4924799, z: 1}
+  m_LocalPosition: {x: 0.34640217, y: -0.0027000199, z: 0}
+  m_LocalScale: {x: 0.17775762, y: 0.6868124, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2915970181034205281}
@@ -219,7 +283,7 @@ Transform:
   m_GameObject: {fileID: 8539903357042681594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.0100001665, y: 0.20853661, z: 0}
+  m_LocalPosition: {x: 0.0100001665, y: -0.009, z: 0}
   m_LocalScale: {x: 1.2499923, y: 1.2499995, z: 1.2662938}
   m_ConstrainProportionsScale: 0
   m_Children:

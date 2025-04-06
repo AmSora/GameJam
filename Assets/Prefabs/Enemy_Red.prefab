@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: -7059470063428391710}
   - component: {fileID: 3834249190598219020}
   - component: {fileID: 8685484306741686220}
+  - component: {fileID: 3000051075383712728}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemigo
+  m_Name: Enemy_Red
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,3 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -7059470063428391710}
   moveSpeed: 4
+--- !u!114 &3000051075383712728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942945988396923020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef43706c67ef7e14faee7695906aaeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 1
+  coffeeReward: 15
+  enemyTypeID: 3

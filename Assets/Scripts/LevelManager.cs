@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
@@ -8,6 +9,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        main = this;    
+        main = this;
     }
 }

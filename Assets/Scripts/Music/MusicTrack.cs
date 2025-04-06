@@ -1,176 +1,41 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicTrack : MonoBehaviour
 {
-    [SerializeField] AudioSource asSynth01;
-    [SerializeField] AudioSource asSynth02;
-    [SerializeField] AudioSource asPiano01;
-    [SerializeField] AudioSource asPiano02;
-    
-    bool syth01 = false;
-    bool syth02 = false;
-    bool piano01 = false;
-    bool piano02 = false;
+    [SerializeField] private List<MusicLayer> layers = new List<MusicLayer>();
+    private Dictionary<string, AudioSource> trackSources = new Dictionary<string, AudioSource>();
 
-
-    bool dtSyth01 = false;
-    bool dtSyth02 = false;
-    bool dtPiano01 = false;
-    bool dtPiano02 = false;
-
-    float tiempo = 0;
-    float tiempoMaximo = 0;
-
-//--------------------------------------------------------
     void Start()
     {
-        tiempoMaximo = asSynth01.clip.length;
-        asSynth01.Play();
-        asSynth01.mute = true;
-        asSynth02.Play();
-        asSynth02.mute = true;
-        asPiano01.Play();
-        asPiano01.mute = true;
-        asPiano02.Play();
-        asPiano02.mute = true;
-    }
-
-    void Update()
-    {
-        tiempo += Time.deltaTime;
-        Debug.Log("Tiempo: " + tiempo);
-
-        if (tiempo > tiempoMaximo)
+        foreach (MusicLayer layer in layers)
         {
-            tiempo = 0;
-        }
+            if (layer.clip == null || string.IsNullOrEmpty(layer.id)) continue;
 
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            //dtSyth01 = true;
-            syth01 = !syth01;
-            ActivarSyth01();
-        }
+            GameObject audioObj = new GameObject("Track_" + layer.id);
+            audioObj.transform.SetParent(this.transform);
 
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            //dtSyth02 = true;
-            syth02 = !syth02;
-            ActivarSyth02();
-        }
+            AudioSource source = audioObj.AddComponent<AudioSource>();
+            source.clip = layer.clip;
+            source.loop = true;
+            source.playOnAwake = false;
+            source.mute = true;
+            source.spatialBlend = 0;
+            source.Play();
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            //dtPiano01 = true;
-            piano01 = !piano01;
-            ActivarPiano01();
-        }
-
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            //dtPiano02 = true;
-            piano02 = !piano02;
-            ActivarPiano02();
-        }
-
-        //ActivarMusica();
-    }
-
-//--------------------------------------------------------
-    void ActivarMusica()
-    {
-        if( tiempo == 0 || tiempo == tiempoMaximo/2)
-        {
-            if(dtSyth01)
-            {
-                syth01 = !syth01;
-                ActivarSyth01();
-                //dtSyth01 = false;
-            }
-
-            if(dtSyth02)
-            {
-                syth02 = !syth02;
-                ActivarSyth02();
-                //dtSyth02 = false;
-            }
-
-            if(dtPiano01)
-            {
-                piano01 = !piano01;
-                ActivarPiano01();
-                //dtPiano01 = false;
-            }
-
-            if(dtPiano02)
-            {
-                piano02 = !piano02;
-                ActivarPiano02();
-                //dtPiano02 = false;
-            }
+            trackSources[layer.id] = source;
         }
     }
 
-
-
-
-
-    void ActivarSyth01()
+    public void SetTrackState(string id, bool active)
     {
-        if(syth01)
+        if (trackSources.ContainsKey(id))
         {
-            asSynth01.mute = false;
-            //asSynth01.time = tiempoActivacion;
-            //asSynth01.Play();
+            trackSources[id].mute = !active;
         }
         else
         {
-            asSynth01.mute = true;
-            //asSynth01.Stop();
-        }
-    }
-    void ActivarSyth02()
-    {
-        if(syth02)
-        {
-            asSynth02.mute = false;
-            //asSynth02.time = tiempoActivacion;
-            //asSynth02.Play();
-        }
-        else
-        {
-            asSynth02.mute = true;
-            //asSynth02.Stop();
-        }
-    }
-
-    void ActivarPiano01()
-    {
-        if(piano01)
-        {
-            asPiano01.mute = false;
-            //asPiano01.time = tiempoActivacion;
-            //asPiano01.Play();
-        }
-        else
-        {
-            asPiano01.mute = true;
-            //asPiano01.Stop();
-        }
-    }
-
-    void ActivarPiano02()
-    {
-        if(piano02)
-        {
-            asPiano02.mute = false;
-            //asPiano02.time = tiempoActivacion;
-            //asPiano02.Play();
-        }
-        else
-        {
-            asPiano02.mute = true;
-            //asPiano02.Stop();
+            Debug.LogWarning("Track ID not found: " + id);
         }
     }
 }

@@ -12,6 +12,6 @@ public class TowerButton : MonoBehaviour
 
     public void SeleccionarEstaTorreta()
     {
-        UIManager.instance.SeleccionarTorreta(torretaPrefab);
+        UIManager.instance.SelectTower(torretaPrefab);
     }
 }
