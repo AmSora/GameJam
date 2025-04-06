@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 8c7e15df8c905af4aaeb60731ea804e3
+guid: a1499c2df6d1a3b43a1c96cc50705a34
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5685256894345382184
-    second: enemigo_01_0
-  - first:
-      213: 1461266478036233770
-    second: enemigo_01_1
-  - first:
-      213: 671061856588705825
-    second: enemigo_01_2
-  - first:
-      213: -5095040756315627792
-    second: enemigo_01_3
+      213: 1373799015373384906
+    second: TileB_Jam_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,89 +113,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemigo_01_0
+      name: TileB_Jam_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: accac100de6b01310800000000000000
+      internalID: 1373799015373384906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileB_Jam_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76c02d2d261e6f4090f4cc71051fedd
+      internalID: 277193395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileB_Jam_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e6e579586f9c4469ef5f1d16931ec2
+      internalID: 1183910819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileB_Jam_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af1fa75a071bce7408b1fceeafb8f02f
+      internalID: -759144856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileB_Jam_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8290c4c060716ee40800000000000000
-      internalID: 5685256894345382184
+      spriteID: 34f62efca9c6f4343a17f2a9ba123e47
+      internalID: 455303833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemigo_01_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2e2981ae16774410800000000000000
-      internalID: 1461266478036233770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemigo_01_2
+      name: TileB_Jam_5
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 120b8400437105900800000000000000
-      internalID: 671061856588705825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemigo_01_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0fe5ba34d67ca49b0800000000000000
-      internalID: -5095040756315627792
+      spriteID: d6fb3eda74ca0e54d8b821e3bea5275f
+      internalID: -88678572
       vertices: []
       indices: 
       edges: []
@@ -213,7 +248,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c9bc030711d07314b8ec1f129f131a4d
+    spriteID: ce649172037a035458bab065ed3c67dd
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +258,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      enemigo_01_0: 5685256894345382184
-      enemigo_01_1: 1461266478036233770
-      enemigo_01_2: 671061856588705825
-      enemigo_01_3: -5095040756315627792
+      TileB_Jam_0: 1373799015373384906
+      TileB_Jam_1: 277193395
+      TileB_Jam_2: 1183910819
+      TileB_Jam_3: -759144856
+      TileB_Jam_4: 455303833
+      TileB_Jam_5: -88678572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
