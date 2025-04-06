@@ -43,7 +43,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SaturatePower: 5
-    - _Speed: 0.01
+    - _Speed: 0.002
     m_Colors:
     - _StarColor: {r: 0.9528302, g: 0.8957627, b: 0.885413, a: 0}
   m_BuildTextureStacks: []
